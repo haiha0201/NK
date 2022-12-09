@@ -1,0 +1,43 @@
+DBPP_r50:
+  ckpt: dbnet/dbnetpp_r50dcnv2_fpnc_1200e_icdar2015-20220502-d7a76fff.pth
+  config: dbnetpp/dbnetpp_r50dcnv2_fpnc_1200e_icdar2015.py
+DB_r18:
+  ckpt: dbnet/dbnet_r18_fpnc_sbn_1200e_icdar2015_20210329-ba3ab597.pth
+  config: dbnet/dbnet_r18_fpnc_1200e_icdar2015.py
+DB_r50:
+  ckpt: dbnet/dbnet_r50dcnv2_fpnc_sbn_1200e_icdar2015_20211025-9fe3b590.pth
+  config: dbnet/dbnet_r50dcnv2_fpnc_1200e_icdar2015.py
+DRRG:
+  ckpt: drrg/drrg_r50_fpn_unet_1200e_ctw1500_20211022-fb30b001.pth
+  config: drrg/drrg_r50_fpn_unet_1200e_ctw1500.py
+FCE_CTW_DCNv2:
+  ckpt: fcenet/fcenet_r50dcnv2_fpn_1500e_ctw1500_20211022-e326d7ec.pth
+  config: fcenet/fcenet_r50dcnv2_fpn_1500e_ctw1500.py
+FCE_IC15:
+  ckpt: fcenet/fcenet_r50_fpn_1500e_icdar2015_20211022-daefb6ed.pth
+  config: fcenet/fcenet_r50_fpn_1500e_icdar2015.py
+MaskRCNN_CTW:
+  ckpt: maskrcnn/mask_rcnn_r50_fpn_160e_ctw1500_20210219-96497a76.pth
+  config: maskrcnn/mask_rcnn_r50_fpn_160e_ctw1500.py
+MaskRCNN_IC15:
+  ckpt: maskrcnn/mask_rcnn_r50_fpn_160e_icdar2015_20210219-8eb340a3.pth
+  config: maskrcnn/mask_rcnn_r50_fpn_160e_icdar2015.py
+MaskRCNN_IC17:
+  ckpt: maskrcnn/mask_rcnn_r50_fpn_160e_icdar2017_20210218-c6ec3ebb.pth
+  config: maskrcnn/mask_rcnn_r50_fpn_160e_icdar2017.py
+PANet_CTW:
+  ckpt: panet/panet_r18_fpem_ffm_sbn_600e_ctw1500_20210219-3b3a9aa3.pth
+  config: panet/panet_r18_fpem_ffm_600e_ctw1500.py
+PANet_IC15:
+  ckpt: panet/panet_r18_fpem_ffm_sbn_600e_icdar2015_20210219-42dbe46a.pth
+  config: panet/panet_r18_fpem_ffm_600e_icdar2015.py
+PS_CTW:
+  ckpt: psenet/psenet_r50_fpnf_600e_ctw1500_20210401-216fed50.pth
+  config: psenet/psenet_r50_fpnf_600e_ctw1500.py
+PS_IC15:
+  ckpt: psenet/psenet_r50_fpnf_600e_icdar2015_pretrain-eefd8fe6.pth
+  config: psenet/psenet_r50_fpnf_600e_icdar2015.py
+Tesseract: {}
+TextSnake:
+  ckpt: textsnake/textsnake_r50_fpn_unet_1200e_ctw1500-27f65b64.pth
+  config: textsnake/textsnake_r50_fpn_unet_1200e_ctw1500.py

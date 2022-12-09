@@ -1,0 +1,12 @@
+batch_mode: false
+recog_batch_size: 0
+det_batch_size: 0
+single_batch_size: 0
+device: null
+export: ''
+export_format: json
+details: false
+imshow: false
+print_result: false
+merge: false
+merge_xdist: 20

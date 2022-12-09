@@ -1,0 +1,40 @@
+ABINet:
+  ckpt: abinet/abinet_academic-f718abf6.pth
+  config: abinet/abinet_academic.py
+ABINet_Vision:
+  ckpt: abinet/abinet_vision_only_academic-e6b9ea89.pth
+  config: abinet/abinet_vision_only_academic.py
+CRNN:
+  ckpt: crnn/crnn_academic-a723a1c5.pth
+  config: crnn/crnn_academic_dataset.py
+CRNN_TPS:
+  ckpt: tps/crnn_tps_academic_dataset_20210510-d221a905.pth
+  config: tps/crnn_tps_academic_dataset.py
+MASTER:
+  ckpt: master/master_r31_12e_ST_MJ_SA-787edd36.pth
+  config: master/master_r31_12e_ST_MJ_SA.py
+NRTR_1/16-1/8:
+  ckpt: nrtr/nrtr_r31_1by16_1by8_academic_20211124-f60cebf4.pth
+  config: nrtr/nrtr_r31_1by16_1by8_academic.py
+NRTR_1/8-1/4:
+  ckpt: nrtr/nrtr_r31_1by8_1by4_academic_20211123-e1fdb322.pth
+  config: nrtr/nrtr_r31_1by8_1by4_academic.py
+RobustScanner:
+  ckpt: robustscanner/robustscanner_r31_academic-5f05874f.pth
+  config: robust_scanner/robustscanner_r31_academic.py
+SAR:
+  ckpt: sar/sar_r31_parallel_decoder_academic-dba3a4a3.pth
+  config: sar/sar_r31_parallel_decoder_academic.py
+SAR_CN:
+  ckpt: sar/sar_r31_parallel_decoder_chineseocr_20210507-b4be8214.pth
+  config: sar/sar_r31_parallel_decoder_chinese.py
+SATRN:
+  ckpt: satrn/satrn_academic_20211009-cb8b1580.pth
+  config: satrn/satrn_academic.py
+SATRN_sm:
+  ckpt: satrn/satrn_small_20211009-2cf13355.pth
+  config: satrn/satrn_small.py
+SEG:
+  ckpt: seg/seg_r31_1by16_fpnocr_academic-72235b11.pth
+  config: seg/seg_r31_1by16_fpnocr_academic.py
+Tesseract: {}
