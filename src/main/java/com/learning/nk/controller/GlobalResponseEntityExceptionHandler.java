@@ -23,9 +23,9 @@ public class GlobalResponseEntityExceptionHandler extends ResponseEntityExceptio
     }
 
     @Data
-    private static class FailResponseEntity {
+    public static class FailResponseEntity {
         private String message;
 
-        private FailResponseEntity(String message) {this.message = message;}
+        public FailResponseEntity(String message) {this.message = message;}
     }
 }

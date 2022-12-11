@@ -1,7 +1,6 @@
 package com.learning.nk.configuration;
 
 import com.learning.nk.service.CustomUserDetailsService;
-import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -32,23 +31,25 @@ public class Security {
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http.cors()
                 .and()
-                .csrf().disable()
-                .formLogin().disable()
-                .httpBasic().disable()
+                .csrf()
+                .disable()
+                .formLogin()
+                .disable()
+                .httpBasic()
+                .disable()
                 .authenticationProvider(authenticationProvider())
                 .exceptionHandling()
-                    .authenticationEntryPoint(
-                            (request , response , authException) -> response.sendError(
-                                    HttpServletResponse.SC_UNAUTHORIZED ,
-                                    authException.getLocalizedMessage()))
-                    .and()
+                .authenticationEntryPoint(
+                        (request , response , authException) -> response.sendRedirect(
+                                "/error/unauthorized"))
+                .and()
                 .authorizeHttpRequests()
-                    .requestMatchers("/auth/login", "/auth/signup")
-                    .permitAll()
-                    .and()
+                .requestMatchers("/auth/login" , "/auth/signup", "/error/*")
+                .permitAll()
+                .and()
                 .authorizeHttpRequests()
-                    .anyRequest()
-                    .authenticated();
+                .anyRequest()
+                .authenticated();
         return http.build();
     }
 
