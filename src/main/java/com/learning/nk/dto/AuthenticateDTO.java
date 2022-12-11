@@ -1,4 +1,4 @@
-package com.learning.nk.model;
+package com.learning.nk.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -9,7 +9,7 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class AuthenticateRequest {
+public class AuthenticateDTO {
     private String username;
     private String password;
 }

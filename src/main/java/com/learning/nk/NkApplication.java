@@ -8,9 +8,11 @@ import org.springframework.boot.autoconfigure.security.servlet.UserDetailsServic
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 
-@SpringBootApplication(exclude= {UserDetailsServiceAutoConfiguration.class, SecurityAutoConfiguration.class})
-@ComponentScan({"com.learning.nk*"})
-@EntityScan("com.learning.nk*")
+@SpringBootApplication(
+        scanBasePackages = "com.learning.nk",
+        exclude= {UserDetailsServiceAutoConfiguration.class, SecurityAutoConfiguration.class})
+@ComponentScan({"com.learning.nk"})
+@EntityScan("com.learning.nk.*")
 public class NkApplication {
     public static void main(String[] args) {
         SpringApplication.run(NkApplication.class , args);

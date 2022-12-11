@@ -1,7 +1,8 @@
 package com.learning.nk.controller;
 
-import com.learning.nk.model.AuthenticateRequest;
+import com.learning.nk.dto.AuthenticateDTO;
 import com.learning.nk.service.AuthService;
+import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -18,14 +19,16 @@ public class AuthController {
     public AuthController(AuthService authenticate) {this.authenticate = authenticate;}
 
     @PostMapping("/login")
-    public ResponseEntity<String> login(@RequestBody AuthenticateRequest authenticateRequest) {
-        authenticate.login(authenticateRequest);
+    public ResponseEntity<String> login(HttpServletRequest request ,
+                                        @RequestBody AuthenticateDTO authenticateDTO) {
+        authenticate.login(request, authenticateDTO);
         return ResponseEntity.ok("success");
     }
 
     @PostMapping("/signup")
-    public ResponseEntity<String> signup(@RequestBody AuthenticateRequest authenticateRequest) {
-        authenticate.signup(authenticateRequest);
+    public ResponseEntity<String> signup(HttpServletRequest request ,
+                                         @RequestBody AuthenticateDTO authenticateDTO) {
+        authenticate.signup(request, authenticateDTO);
         return ResponseEntity.ok("success");
     }
 }
