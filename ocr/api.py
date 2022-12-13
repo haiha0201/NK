@@ -6,22 +6,24 @@ from icecream import ic, install
 install()
 
 from model import Model
-from utils import get_image_from_url, sort_text
+from utils import get_image_from_url, sort_text, BadRequest
 
 
 app = Flask(__name__)
 @app.route('/detect')
 def detect():
-    global model, opt
-    url = request.args.get('url')
-    bbox = request.args.get('bbox', default=False, type=bool)
-    
-    opt.img = get_image_from_url(url)
-    items = model.readtext(**vars(opt))[0]['result']
-    if bbox:
-        return jsonify(items)
-    return jsonify(sort_text(items))
-
+    try:
+        global model, opt
+        url = request.args.get('url')
+        bbox = request.args.get('bbox', default=False, type=bool)
+        
+        opt.img = get_image_from_url(url)
+        items = model.readtext(**vars(opt))[0]['result']
+        if bbox:
+            return jsonify(items)
+        return jsonify(sort_text(items))
+    except BadRequest:
+        return 'Bad request', 400
 
 if __name__ == '__main__':
     parser = ArgumentParser()

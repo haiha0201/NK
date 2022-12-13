@@ -4,9 +4,16 @@ from PIL import Image
 from io import BytesIO
 
 
+class BadRequest(Exception):
+    pass
+
+
 def get_image_from_url(url):
-    response = requests.get(url)
-    return np.array(Image.open(BytesIO(response.content)))
+    try:
+        response = requests.get(url)
+        return np.array(Image.open(BytesIO(response.content)))
+    except:
+        raise BadRequest
 
 
 def sort_text(items):
