@@ -36,4 +36,5 @@ def sort_text(items):
         row.sort(key=lambda item: np.mean(item['box'][::2])) # sort row by x
         lines.append([item['text'] for item in row])
     
-    return lines
+    text = '\n'.join([' '.join(line) for line in lines])
+    return text

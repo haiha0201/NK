@@ -22,7 +22,7 @@ Params:
 
 * `url`: url of image in string
 
-Response: List of text rows sorted from top to bottom, each row is a list of words sorted from left to right
+Response: text
 
 Example:
 
@@ -34,13 +34,14 @@ http://127.0.0.1:5000/detect?url=https://www.wikihow.com/images/thumb/c/c2/Analy
 
 * Response:
 
-```json
-[["conclude","by","restating","thesis"],
- ["in","the","end","even","the","characters","of","blue"],
- ["ruin","know","how","pointless","their","feud","is"],
- ["but","revenge","much","like","every","taut","minute"],
- ["this","thriller","far","too","addictive","to"],["give","until","the","bitter","end"],
- ["wikihow","to","analyze","scene","in","film"]]
+```
+conclude by restating thesis
+in the end even the characters of blue
+ruin know how pointless their feud is
+but revenge much like every taut minute
+this thriller far too addictive to
+give until the bitter end
+wikihow to analyze scene in film
 ```
 
 

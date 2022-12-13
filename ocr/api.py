@@ -21,7 +21,7 @@ def detect():
         items = model.readtext(**vars(opt))[0]['result']
         if bbox:
             return jsonify(items)
-        return jsonify(sort_text(items))
+        return sort_text(items)
     except BadRequest:
         return 'Bad request', 400
 
