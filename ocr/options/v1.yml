@@ -1,0 +1,11 @@
+model_det: DB_r50
+model_recog: SEG
+batch_mode: false
+recog_batch_size: 0
+det_batch_size: 0
+single_batch_size: 0
+device: null
+export: ''
+export_format: json
+merge: false
+merge_xdist: 20

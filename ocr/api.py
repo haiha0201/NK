@@ -6,7 +6,7 @@ from icecream import ic, install
 install()
 
 from model import Model
-from utils import get_image_from_url
+from utils import get_image_from_url, sort_text
 
 
 app = Flask(__name__)
@@ -14,9 +14,13 @@ app = Flask(__name__)
 def detect():
     global model, opt
     url = request.args.get('url')
+    bbox = request.args.get('bbox', default=False, type=bool)
+    
     opt.img = get_image_from_url(url)
-    res = model.readtext(**vars(opt))[0]['result']
-    return jsonify(res)
+    items = model.readtext(**vars(opt))[0]['result']
+    if bbox:
+        return jsonify(items)
+    return jsonify(sort_text(items))
 
 
 if __name__ == '__main__':
