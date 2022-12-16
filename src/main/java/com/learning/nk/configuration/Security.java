@@ -44,7 +44,7 @@ public class Security {
                                 "/error/unauthorized"))
                 .and()
                 .authorizeHttpRequests()
-                .requestMatchers("/auth/login" , "/auth/signup", "/error/*")
+                .requestMatchers("/auth/login", "/auth/logout", "/auth/signup", "/error/*")
                 .permitAll()
                 .and()
                 .authorizeHttpRequests()
