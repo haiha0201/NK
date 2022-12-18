@@ -11,7 +11,11 @@ class BadRequest(Exception):
 def get_image_from_url(url):
     try:
         response = requests.get(url)
-        return np.array(Image.open(BytesIO(response.content)))
+        img = np.array(Image.open(BytesIO(response.content)))
+        if len(img.shape) == 2:
+            img = np.stack([img, img, img], -1)
+        assert len(img.shape) == 3
+        return img
     except:
         raise BadRequest
 
