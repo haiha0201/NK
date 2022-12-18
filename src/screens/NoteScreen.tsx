@@ -51,7 +51,7 @@ const NoteScreen: React.FC = () => {
   const [selectedNote, setSelectedNote] = useState<NoteInterface | undefined>(
     undefined,
   );
-  const {data, isLoading, refetch} = useNotes();
+  const {data, refetch} = useNotes();
   const mutation = useMutation<string, FailResponseEntity, ImageRequest>({
     mutationFn: variables => {
       const formData = new FormData();
@@ -77,7 +77,10 @@ const NoteScreen: React.FC = () => {
     <React.Fragment>
       {selectedNote && (
         <SingleNote
-          onDiscard={() => setSelectedNote(undefined)}
+          onDiscard={() => {
+            refetch();
+            setSelectedNote(undefined);
+          }}
           data={selectedNote}
         />
       )}

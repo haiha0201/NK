@@ -46,14 +46,16 @@ const App = () => {
           </View>
         </Modal>
       </Portal>
-      <NavigationContainer>
-        <Tab.Navigator>
-          <Tab.Screen name="Home" component={HomeScreen} />
-          <Tab.Screen name="Notes" component={NoteScreen} />
-          <Tab.Screen name="Canvas" component={CanvasScreen} />
-          <Tab.Screen name="Profile" component={ProfileScreen} />
-        </Tab.Navigator>
-      </NavigationContainer>
+      {!isLogin && <HomeScreen />}
+      {isLogin && (
+        <NavigationContainer>
+          <Tab.Navigator>
+            <Tab.Screen name="Notes" component={NoteScreen} />
+            <Tab.Screen name="Canvas" component={CanvasScreen} />
+            <Tab.Screen name="Profile" component={ProfileScreen} />
+          </Tab.Navigator>
+        </NavigationContainer>
+      )}
     </>
   );
 };
