@@ -1,12 +1,12 @@
 import React, {useEffect, useState} from 'react';
 import {ScrollView, View} from 'react-native';
-import NoteView from './NoteView';
+import NoteView from '../components/NoteView';
 import {Button, Modal, Searchbar, Text} from 'react-native-paper';
 import {NoteInterface} from '../entity/NoteInterface';
 import {launchImageLibrary} from 'react-native-image-picker';
 import {url} from '../util/handleAuthentication';
 import {useNotes} from '../util/useNotes';
-import SingleNote from './SingleNote';
+import SingleNote from '../components/SingleNote';
 import {useMutation} from 'react-query';
 import axios from 'axios';
 import {FailResponseEntity} from '../entity/FailResponseEntity';
@@ -21,10 +21,10 @@ function filterFunction(el: NoteInterface, query: string): boolean {
   return el.content.startsWith(query) || el.content.startsWith(query);
 }
 
-function render(data: NoteInterface[]) {
+function render(data: NoteInterface[], onClick: (data: NoteInterface) => void) {
   return data.map((value, index) => (
     <View key={index} style={{marginBottom: 5}}>
-      <NoteView data={value} />
+      <NoteView data={value} onClick={() => onClick(value)} />
     </View>
   ));
 }
@@ -93,7 +93,10 @@ const NoteScreen: React.FC = () => {
           />
           <ScrollView style={{marginTop: 20, marginHorizontal: 10}}>
             {data &&
-              render(data.filter(el => filterFunction(el, searchContent)))}
+              render(
+                data.filter(el => filterFunction(el, searchContent)),
+                setSelectedNote,
+              )}
           </ScrollView>
           <Button
             style={{alignSelf: 'center', marginBottom: 0, marginTop: 'auto'}}
@@ -121,10 +124,11 @@ const NoteScreen: React.FC = () => {
           </Button>
         </>
       )}
-      <Modal visible={mutation.isLoading}>
-        <View style={{width: '80%'}}>
-          <Text>Processing image</Text>
-        </View>
+      <Modal
+        visible={mutation.isLoading}
+        dismissable={true}
+        contentContainerStyle={{backgroundColor: 'white', padding: 20}}>
+        <Text>Processing image</Text>
       </Modal>
     </React.Fragment>
   );

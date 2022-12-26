@@ -9,16 +9,16 @@
  */
 
 import React, {useEffect, useState} from 'react';
-import {NavigationContainer} from '@react-navigation/native';
 import {createMaterialBottomTabNavigator} from '@react-navigation/material-bottom-tabs';
-import NoteScreen from './src/screens/NoteScreen';
-import CanvasScreen from './src/screens/CanvasScreen';
 import {useAppSelector} from './src/util/hooks';
-import ProfileScreen from './src/screens/ProfileScreen';
-import HomeScreen from './src/screens/HomeScreen';
-import {Text, View} from 'react-native';
+import {Text} from 'react-native';
 import {Modal, Portal} from 'react-native-paper';
 import axios from 'axios';
+import {NavigationContainer} from '@react-navigation/native';
+import HomeScreen from './src/screens/HomeScreen';
+import CanvasScreen from './src/screens/CanvasScreen';
+import NoteScreen from './src/screens/NoteScreen';
+import ProfileScreen from './src/screens/ProfileScreen';
 
 const Tab = createMaterialBottomTabNavigator();
 
@@ -40,10 +40,12 @@ const App = () => {
   return (
     <>
       <Portal>
-        <Modal visible={e !== undefined} onDismiss={() => setE(undefined)}>
-          <View style={{flexGrow: 1}}>
-            <Text>{e}</Text>
-          </View>
+        <Modal
+          visible={e !== undefined}
+          onDismiss={() => setE(undefined)}
+          dismissable={true}
+          contentContainerStyle={{backgroundColor: 'white', padding: 20}}>
+          <Text>{e}</Text>
         </Modal>
       </Portal>
       {!isLogin && <HomeScreen />}

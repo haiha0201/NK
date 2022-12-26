@@ -6,7 +6,10 @@ const LeftContent = (props: any) => (
   <Avatar.Icon {...props} icon="comment-outline" />
 );
 
-const NoteView: React.FC<{data: NoteInterface}> = props => {
+const NoteView: React.FC<{
+  data: NoteInterface;
+  onClick: () => void;
+}> = props => {
   return (
     <Card>
       <Card.Title
@@ -18,12 +21,8 @@ const NoteView: React.FC<{data: NoteInterface}> = props => {
         <Paragraph>{props.data?.content}</Paragraph>
       </Card.Content>
       <Card.Actions>
-        <Button
-          mode={'elevated'}
-          onTouchEnd={() => {
-            console.log('hi');
-          }}>
-          Edit (not yet supported)
+        <Button mode={'elevated'} onTouchEnd={props.onClick}>
+          Edit
         </Button>
       </Card.Actions>
     </Card>

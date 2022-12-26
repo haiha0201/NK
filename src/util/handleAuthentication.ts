@@ -37,5 +37,9 @@ export async function uploadImages(
 }
 
 export async function postNote(data: NoteInterface) {
-  return axios.post<NoteInterface, void>(`${url}/api/notes`, data);
+  let notes = `${url}/api/notes`;
+  if (data.id) {
+    return axios.put<NoteInterface, void>(notes, data);
+  }
+  return axios.post<NoteInterface, void>(notes, data);
 }

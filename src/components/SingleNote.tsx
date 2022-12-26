@@ -63,12 +63,24 @@ const SingleNote: React.FC<{
           <Text>Last edited at {data.lastEdited}</Text>
         </View>
       )}
-      <Button
-        onPress={handleSubmit(postNote, console.log)}
-        mode={'outlined'}
-        style={{alignSelf: 'center', marginTop: 'auto', marginBottom: 0}}>
-        Save
-      </Button>
+      <View
+        style={{
+          display: 'flex',
+          flexDirection: 'row',
+          alignSelf: 'center',
+          marginTop: 'auto',
+          marginBottom: 0,
+        }}>
+        <Button
+          onPress={handleSubmit(postNote, console.log)}
+          mode={'outlined'}
+          style={{marginHorizontal: 10}}>
+          Save
+        </Button>
+        <Button onPress={handleSubmit(postNote, console.log)} mode={'outlined'}>
+          Delete
+        </Button>
+      </View>
     </View>
   );
 };

@@ -8,9 +8,9 @@ import {
 } from '@shopify/react-native-skia';
 import React, {createRef} from 'react';
 import {View} from 'react-native';
-import useDraw, {IPath, Point} from './useDraw';
+import useDraw, {IPath, Point} from '../util/useDraw';
 import {Gesture, GestureDetector} from 'react-native-gesture-handler';
-import {GestureHandler} from './GestureHandler';
+import {GestureHandler} from '../util/GestureHandler';
 import RNFS from 'react-native-fs';
 import {FAB} from 'react-native-paper';
 
