@@ -1,5 +1,6 @@
 import {
   Canvas,
+  ImageFormat,
   Path,
   Skia,
   SkiaDomView,
@@ -7,12 +8,11 @@ import {
   useValue,
 } from '@shopify/react-native-skia';
 import React, {createRef} from 'react';
-import {View} from 'react-native';
+import {Text, View} from 'react-native';
 import useDraw, {IPath, Point} from '../util/useDraw';
 import {Gesture, GestureDetector} from 'react-native-gesture-handler';
-import {GestureHandler} from '../util/GestureHandler';
 import RNFS from 'react-native-fs';
-import {FAB} from 'react-native-paper';
+import {Button} from 'react-native-paper';
 
 const renderPath = (path: IPath) => {
   const render = `M ${path.start.x} ${path.start.y} ${path.segments
@@ -43,8 +43,20 @@ const getBoundary = (paths: IPath[]): SkRect => {
 
 const CanvasScreen: React.FC = () => {
   const matrix = useValue(Skia.Matrix());
-  const {paths, panHandler} = useDraw(matrix);
+  const {paths, setPaths, panHandler} = useDraw(matrix);
   const canvasRef = createRef<SkiaDomView>();
+
+  function clear() {
+    setPaths([]);
+  }
+
+  function undo() {
+    setPaths(prevState => {
+      const copy = [...prevState];
+      copy.pop();
+      return copy;
+    });
+  }
 
   function saveImage() {
     // const image: SkImage | undefined = canvasRef.current?.makeImageSnapshot(
@@ -55,14 +67,44 @@ const CanvasScreen: React.FC = () => {
     //   const path = RNFS.PicturesDirectoryPath + '/test.png';
     //   RNFS.writeFile(path, bytes, 'base64').catch(console.log);
     // }
-    const path = RNFS.DocumentDirectoryPath + '/path.txt';
-    let s = JSON.stringify(paths);
-    RNFS.writeFile(path, s).catch(console.log);
+    const myAlbumPath = RNFS.PicturesDirectoryPath;
+    if (!canvasRef.current) {
+      return;
+    }
+
+    RNFS.exists(myAlbumPath)
+      .then(value => {
+        if (!value) {
+          return RNFS.mkdir(myAlbumPath);
+        }
+      })
+      .then(() => {
+        const path = myAlbumPath + '/path.png';
+        console.log(path);
+        let imageSnapshot = canvasRef
+          .current!.makeImageSnapshot()
+          .encodeToBase64(ImageFormat.PNG);
+        return RNFS.writeFile(path, imageSnapshot, 'base64');
+      })
+      .then(() => console.log('success'))
+      .catch(console.log);
   }
 
   return (
-    <View style={{flex: 1}}>
-      <GestureHandler matrix={matrix}>
+    <>
+      <View
+        style={{flexDirection: 'row', alignSelf: 'center', marginVertical: 10}}>
+        <Button mode={'outlined'} style={{marginRight: 10}} onPress={undo}>
+          <Text>Undo</Text>
+        </Button>
+        <Button mode={'outlined'} style={{marginRight: 10}} onPress={clear}>
+          <Text>Clear</Text>
+        </Button>
+        <Button mode={'outlined'} onPress={saveImage}>
+          <Text>Save</Text>
+        </Button>
+      </View>
+      <View style={{flex: 1}}>
         <GestureDetector gesture={Gesture.Race(panHandler)}>
           <View style={{flex: 1}}>
             <Canvas style={{flex: 8}} ref={canvasRef}>
@@ -79,18 +121,8 @@ const CanvasScreen: React.FC = () => {
             </Canvas>
           </View>
         </GestureDetector>
-      </GestureHandler>
-      <FAB
-        icon="plus"
-        onPress={saveImage}
-        style={{
-          position: 'absolute',
-          margin: 16,
-          right: 0,
-          bottom: 0,
-        }}
-      />
-    </View>
+      </View>
+    </>
   );
 };
 export default CanvasScreen;

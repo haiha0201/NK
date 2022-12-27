@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import {ScrollView, View} from 'react-native';
 import NoteView from '../components/NoteView';
-import {Button, Modal, Searchbar, Text} from 'react-native-paper';
+import {Button, Modal, Portal, Searchbar, Text} from 'react-native-paper';
 import {NoteInterface} from '../entity/NoteInterface';
 import {launchImageLibrary} from 'react-native-image-picker';
 import {url} from '../util/handleAuthentication';
@@ -124,12 +124,18 @@ const NoteScreen: React.FC = () => {
           </Button>
         </>
       )}
-      <Modal
-        visible={mutation.isLoading}
-        dismissable={true}
-        contentContainerStyle={{backgroundColor: 'white', padding: 20}}>
-        <Text>Processing image</Text>
-      </Modal>
+      <Portal>
+        <Modal
+          visible={mutation.isLoading}
+          dismissable={true}
+          contentContainerStyle={{
+            backgroundColor: 'white',
+            padding: 20,
+            margin: 10,
+          }}>
+          <Text>Processing image</Text>
+        </Modal>
+      </Portal>
     </React.Fragment>
   );
 };
