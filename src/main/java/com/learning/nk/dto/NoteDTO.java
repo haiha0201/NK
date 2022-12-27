@@ -19,16 +19,18 @@ public class NoteDTO {
     private String content;
     private String title;
 
-    private Date date;
-    private Date lastEdited;
+    private Date date = new Date();
+    private Date lastEdited = new Date();
 
     private String category;
+    private Long id;
 
     public static NoteDTO fromNote(Note note) {
         return NoteDTO.builder()
                 .content(note.getContent())
                 .title(note.getTitle())
                 .category(note.getCategory())
+                .id(note.getId())
                 .build();
     }
 
