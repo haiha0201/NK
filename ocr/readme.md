@@ -10,7 +10,7 @@ Create python env:
 
 Start service:
 
-`python -W ignore api.py -o options/v1.yml`
+`PYTHONPATH="${PYTHONPATH}:NAFNet" python -W ignore api.py -o options/v1.yml`
 
 The service will run on http://127.0.0.1:5000 by default
 
@@ -21,6 +21,7 @@ The service will run on http://127.0.0.1:5000 by default
 Params:
 
 * `url`: url of image in string
+* `deblur` (optional): Deblur input image
 
 Response: text
 
