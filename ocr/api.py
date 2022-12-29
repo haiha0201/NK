@@ -6,6 +6,7 @@ from icecream import ic, install
 install()
 
 from model import Model
+from deblur import get_deblur_model, deblur_image
 from utils import get_image_from_url, sort_text, BadRequest
 
 
@@ -16,8 +17,11 @@ def detect():
         global model, opt
         url = request.args.get('url')
         bbox = request.args.get('bbox', default=False, type=bool)
+        deblur = request.args.get('deblur', default=False, type=bool)
         
         opt.img = get_image_from_url(url)
+        if deblur:
+            opt.img = deblur_image(deblur_model, opt.img)
         items = model.readtext(**vars(opt))[0]['result']
         if bbox:
             return jsonify(items)
@@ -40,4 +44,7 @@ if __name__ == '__main__':
         recog=opt.model_recog,
         config_dir='configs/',
     )
+
+    deblur_model = get_deblur_model()
+
     app.run()
